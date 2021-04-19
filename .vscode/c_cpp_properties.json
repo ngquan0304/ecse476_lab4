@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/ngquan0304/ws/devel/include",
+                "/home/ngquan0304/ros_ws/devel/include",
+                "/opt/ros/noetic/include",
+                "/home/ngquan0304/ws/src/Mobile-Robotics-Lab4/pcl_utils/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++14"
+        }
+    ],
+    "version": 4
+}
