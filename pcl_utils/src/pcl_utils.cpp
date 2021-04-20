@@ -237,6 +237,26 @@ void PclUtils::fit_points_to_plane(pcl::PointCloud<pcl::PointXYZ>::Ptr input_clo
 
 }
 
+
+// above but for PointXYZRGB
+void PclUtils::fit_points_to_plane(pcl::PointCloud<pcl::PointXYZRGB>::Ptr input_cloud_ptr, Eigen::Vector3f &plane_normal, double &plane_dist) {
+    Eigen::MatrixXf points_mat;
+    Eigen::Vector3f cloud_pt;
+    //populate points_mat from cloud data;
+
+    int npts = input_cloud_ptr->points.size();
+    points_mat.resize(3, npts);
+
+    //somewhat odd notation: getVector3fMap() reading OR WRITING points from/to a pointcloud, with conversions to/from Eigen
+    for (int i = 0; i < npts; ++i) {
+        cloud_pt = input_cloud_ptr->points[i].getVector3fMap();
+        points_mat.col(i) = cloud_pt;
+    }
+    fit_points_to_plane(points_mat, plane_normal, plane_dist);
+
+}
+
+
 //compute and return the centroid of a pointCloud
 Eigen::Vector3f  PclUtils::compute_centroid(pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud_ptr) {
     Eigen::Vector3f centroid;
@@ -808,6 +828,28 @@ void PclUtils::filter_cloud_z(PointCloud<pcl::PointXYZ>::Ptr inputCloud, double 
 
 //find points that are both (approx) coplanar at height z_nom AND within "radius" of "centroid"
 void PclUtils::box_filter(PointCloud<pcl::PointXYZ>::Ptr inputCloud, Eigen::Vector3f pt_min, Eigen::Vector3f pt_max, 
+                vector<int> &indices)  {
+    int npts = inputCloud->points.size();
+    Eigen::Vector3f pt;
+    indices.clear();
+    double dz;
+    int ans;
+    for (int i = 0; i < npts; ++i) {
+        pt = inputCloud->points[i].getVector3fMap();
+        //cout<<"pt: "<<pt.transpose()<<endl;
+        //check if in the box:
+        if ((pt[0]>pt_min[0])&&(pt[0]<pt_max[0])&&(pt[1]>pt_min[1])&&(pt[1]<pt_max[1])&&(pt[2]>pt_min[2])&&(pt[2]<pt_max[2])) { 
+            //passed box-crop test; include this point
+               indices.push_back(i);
+        }
+    }
+    int n_extracted = indices.size();
+    cout << " number of points in range = " << n_extracted << endl;    
+    
+}
+
+//same as above, but for pointXYZRGB
+void PclUtils::box_filter(PointCloud<pcl::PointXYZRGB>::Ptr inputCloud, Eigen::Vector3f pt_min, Eigen::Vector3f pt_max, 
                 vector<int> &indices)  {
     int npts = inputCloud->points.size();
     Eigen::Vector3f pt;

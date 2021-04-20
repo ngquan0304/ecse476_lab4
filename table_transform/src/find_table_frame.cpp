@@ -150,9 +150,7 @@ int main(int argc, char** argv) {
     int nsamps = downsampled_kinect_ptr->points.size();
     ROS_INFO("num pts in downsampled cloud: %d", nsamps);
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr downsampled_kinect_ptr_xyz (new pcl::PointCloud<pcl::PointXYZ>);
-    pcl::copyPointCloud(*downsampled_kinect_ptr, *downsampled_kinect_ptr_xyz);
-    pclUtils.box_filter(downsampled_kinect_ptr_xyz, box_pt_min, box_pt_max, indices);
+    pclUtils.box_filter(downsampled_kinect_ptr, box_pt_min, box_pt_max, indices);
 
     pcl::copyPointCloud(*downsampled_kinect_ptr, indices, *box_filtered_cloud_ptr); //extract these pts into new cloud
     //the new cloud is a set of points from original cloud, coplanar with selected patch; display the result
@@ -162,9 +160,9 @@ int main(int argc, char** argv) {
     Eigen::Vector3f plane_normal;
     double plane_dist;
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr box_filtered_cloud_ptr_xyz (new pcl::PointCloud<pcl::PointXYZ>);
-    pcl::copyPointCloud(*box_filtered_cloud_ptr, *box_filtered_cloud_ptr_xyz);
-    pclUtils.fit_points_to_plane(box_filtered_cloud_ptr_xyz, plane_normal, plane_dist);
+
+    pclUtils.fit_points_to_plane(box_filtered_cloud_ptr, plane_normal, plane_dist);
+
     ROS_INFO_STREAM("plane_normal = " << plane_normal.transpose() << "; plane_dist = " << plane_dist << endl);
     createInterpolatedPlaneCloud(fitted_plane_ptr, plane_normal, plane_dist, box_pt_max(0), box_pt_max(1), box_pt_min(0), box_pt_min(1));
     int n_fitted = fitted_plane_ptr->points.size();
@@ -215,9 +213,7 @@ int main(int argc, char** argv) {
     ROS_INFO("analyzing transformed cloud: ");
     //test: fit a plane to the surviving points
     //we SHOULD find that the surface normal is [0;0;1] and the offset distance is zero
-    pcl::PointCloud<pcl::PointXYZ>::Ptr output_cloud_wrt_table_ptr_xyz (new pcl::PointCloud<pcl::PointXYZ>);
-    pcl::copyPointCloud(*output_cloud_wrt_table_ptr, *output_cloud_wrt_table_ptr_xyz);
-    pclUtils.fit_points_to_plane(output_cloud_wrt_table_ptr_xyz, plane_normal, plane_dist);
+    pclUtils.fit_points_to_plane(output_cloud_wrt_table_ptr, plane_normal, plane_dist);
 
     //this is somewhat unusual: write out a ROS launchfile that contains the results herein,
     // describing the transform between camera frame and table frame

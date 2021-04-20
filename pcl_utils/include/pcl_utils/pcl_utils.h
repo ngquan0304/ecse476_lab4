@@ -69,6 +69,7 @@ public:
     Eigen::Vector3f  compute_centroid(pcl::PointCloud<pcl::PointXYZ> &input_cloud);
     
     void fit_points_to_plane(pcl::PointCloud<pcl::PointXYZ>::Ptr input_cloud_ptr,Eigen::Vector3f &plane_normal, double &plane_dist);
+    void fit_points_to_plane(pcl::PointCloud<pcl::PointXYZRGB>::Ptr input_cloud_ptr,Eigen::Vector3f &plane_normal, double &plane_dist);
     //void fit_xformed_selected_pts_to_plane(Eigen::Vector3f &plane_normal, double &plane_dist);  
 
 // 
@@ -156,6 +157,9 @@ public:
 
     void box_filter(PointCloud<pcl::PointXYZ>::Ptr inputCloud, Eigen::Vector3f pt_min, Eigen::Vector3f pt_max, 
                 vector<int> &indices);
+    void box_filter(PointCloud<pcl::PointXYZRGB>::Ptr inputCloud, Eigen::Vector3f pt_min, Eigen::Vector3f pt_max, 
+                vector<int> &indices);
+                
     void box_filter(Eigen::Vector3f pt_min, Eigen::Vector3f pt_max, vector<int> &indices);
     bool find_plane_fit(double x_min, double x_max, double y_min, double y_max, double z_min, double z_max, double dz_tol,
       Eigen::Vector3f &plane_normal, double &plane_dist, Eigen::Vector3f &major_axis, Eigen::Vector3f  &centroid);
