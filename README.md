@@ -15,7 +15,7 @@ At workspace of learning_ros package:
 
 `roslaunch baxter_launch_files baxter_playfiles_nodes.launch`
 
-From here on, suppose we are at the directory contain pcd files and want to use `arm1.pcd`
+From here on, suppose we are at the directory contain pcd files and want to use `arm1.pcd` along with `arm1.jsp`. Both are currently in `ecse476_lab4/table_transform/arm_images`
 
 - Display pcd file.
 
@@ -36,3 +36,7 @@ From here on, suppose we are at the directory contain pcd files and want to use 
 `roslaunch table_transform camera_frame_wrt_head.launch`
 
 (make sure to keep the global setting at `torso` to observe the robot normally)
+
+- Move the robot right arm to the position in `arm1.pcd` (currentl directory must be at arm_images. Can access the folder by `roscd table_transform`, then `cd arm_images`)
+
+`rosrun baxter_playfile_nodes baxter_playback arm1.jsp`
