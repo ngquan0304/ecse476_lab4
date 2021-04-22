@@ -38,9 +38,10 @@ catkin_simple()
 
 cs_add_executable(find_table_frame src/find_table_frame.cpp)
 cs_add_executable(find_points_above_table src/find_points_above_table.cpp)
+cs_add_executable(find_block src/find_block.cpp)
 
 
-#the following is required, if desire to link a node in this package with a library created in this same package
+# the following is required, if desire to link a node in this package with a library created in this same package
 # edit the arguments to reference the named node and named library within this package
 # target_link_libraries(example my_lib)
 
