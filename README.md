@@ -15,11 +15,13 @@ At workspace of learning_ros package:
 
 `roslaunch baxter_launch_files baxter_playfiles_nodes.launch`
 
-From here on, suppose we are at the directory contain pcd files and want to use `arm1.pcd` along with `arm1.jsp`. Both are currently in `ecse476_lab4/table_transform/arm_images`
+From here on, suppose we are at the directory contain pcd files and want to use `arm1.pcd` along with `arm1.jsp`. Both are currently in `src/ecse476_lab4/table_transform/arm_images`
 
 - Display pcd file.
 
 `rosrun pcl_utils display_pcd_file` then `arm1.pcd`
+
+'src/ecse476_lab4/table_transform/arm_images/arm2.pcd'
 
 - In RViz, add pointcloud2 that subsribes to `/pcd`, and change the global options' frame to `camera_depth_optical_frame` to check if the pointcloud can be seen.
 
