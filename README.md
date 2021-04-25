@@ -1,44 +1,65 @@
+
+---
 # Mobile Robotics - Lab4
 
-## Objective
+## Objectives
 - To create a transform that relates the camera frame to the robot's torso frame
-- to calibrate and validate coordinates of blokcs with respect to the torso frame, as seen by camera
+- To calibrate and validate coordinates of blokcs with respect to the torso frame, as seen by camera
 
-## Part 1: Depth camera extrinsic calibration
-At workspace of learning_ros package:
+## Command sets:
 
-- Run gazebo simulation of baxter file.
+1. **To play jsp files with Baxter in Gazebo**
 
-`roslaunch baxter_gazebo baxter_world.launch`
+[Learning ROS ws] `roslaunch baxter_gazeo baxter_world.launch`
 
-- Run the playfiles of baxter to relocate .
+[Learning ROS ws] `roslaunch baxter_launch_files baxter_playfile_nodes.launch`
 
-`roslaunch baxter_launch_files baxter_playfiles_nodes.launch`
+- Suppose we use `arm1.jsp`, Redirect to the directory contain the file.
 
-From here on, suppose we are at the directory contain pcd files and want to use `arm1.pcd` along with `arm1.jsp`. Both are currently in `src/ecse476_lab4/table_transform/arm_images`
+[This Repo ws] `rosrun baxter_playfile_nodes baxter_playback arm1.jsp`
 
-- Display pcd file.
+2. **To show pcd files and demo block recognition in RViZ**
 
-`rosrun pcl_utils display_pcd_file` then `arm1.pcd`
+[Learning ROS ws] `roslaunch baxter_gazebo baxter_world.launch`
 
-'src/ecse476_lab4/table_transform/arm_images/arm2.pcd'
+[Learning ROS ws] `roslaunch baxter_launch_files baxter_playfile_nodes.launch`
 
-- In RViz, add pointcloud2 that subsribes to `/pcd`, and change the global options' frame to `camera_depth_optical_frame` to check if the pointcloud can be seen.
+[Don't use this] `rosrun table_transform find_table_frame`
 
-- Find and create a launch file to publish the transformation of the table w.r.t. to the camera
+[This Repo ws] `roslaunch table_transform table_frame_wrt_cam.launch`
 
-`rosrun table_transform find_table_frame` (can stop the node after done)
+[This Repo ws] `roslaunch table_transform camera_frame_wrt_head.launch`
 
-- Publish the transformation above
+[This Repo ws] `rosrun table_transform find_block`
 
-`roslaunch table_transform table_frame_wrt_cam.launch`
+---
+# Result
+## Part 1:
+- Calibrated values for head/kinect_link: in `camera_frame_wrt_head.launch`
+  
+> \<node pkg="tf" type="static_transform_publisher" name="kinect_calib" args="0.166 0.03 0.123 0.102 1.425 0.0  head kinect_link 50"/>
 
-- Publish the transformation from the camera to the head of the robot
+## Part 2:
+### **block5.pcd:**
+    - Translation: [0.638, 0.012, -0.186]
+    - Rotation: in Quaternion [-0.007, -0.002, 0.050, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.100]
+            in RPY (degree) [-0.844, -0.197, 5.715]
+### **block8.pcd:**
+    - Translation: [0.806, -0.401, -0.179]
+    - Rotation: in Quaternion [-0.007, -0.002, 0.050, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.100]
+            in RPY (degree) [-0.844, -0.197, 5.715]
+### **block9.pcd:**
+    - Translation: [0.411, -0.410, -0.181]
+    - Rotation: in Quaternion [-0.007, -0.002, 0.050, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.100]
+            in RPY (degree) [-0.844, -0.197, 5.714]
+### **block10.pcd:**
+    - Translation: [0.459, 0.090, -0.188]
+    - Rotation: in Quaternion [-0.007, -0.002, 0.050, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.100]
+            in RPY (degree) [-0.844, -0.197, 5.714]
 
-`roslaunch table_transform camera_frame_wrt_head.launch`
-
-(make sure to keep the global setting at `torso` to observe the robot normally)
-
-- Move the robot right arm to the position in `arm1.pcd` (currentl directory must be at arm_images. Can access the folder by `roscd table_transform`, then `cd arm_images`)
-
-`rosrun baxter_playfile_nodes baxter_playback arm1.jsp`
+#### Remarks:
+- The coordinates are within ± 6 mm compared to provided data.

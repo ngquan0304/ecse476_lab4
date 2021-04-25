@@ -1,0 +1,5 @@
+<launch>
+
+<node pkg="tf" type="static_transform_publisher" name="correct_table_wrt_torso" args="0.275, 0.022, -0.202, -0.010, -0.029, -0.065, 0.997 torso table_frame 50"/>
+
+</launch>

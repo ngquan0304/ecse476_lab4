@@ -145,20 +145,20 @@ int main(int argc, char **argv)
     ros_pts_above_table.header.frame_id = "table_frame";
 
     Eigen::Vector3f box_pt_min, box_pt_max;
-    box_pt_min << 0, -1, -1;
+    box_pt_min << 0.02, -1, -1;
     box_pt_max << 1, 0.2, 1;
 
     vector<int> indices2;
     pclUtils.box_filter(pts_above_table_ptr, box_pt_min, box_pt_max, indices);
     pcl::copyPointCloud(*pts_above_table_ptr, indices, *pts_above_right_table_ptr); //extract these pts into new cloud
-    pcl::toROSMsg(*pts_above_right_table_ptr, ros_pts_above_right_table); //convert to ros message for publication and display
+    pcl::toROSMsg(*pts_above_right_table_ptr, ros_pts_above_right_table);           //convert to ros message for publication and display
     ros_pts_above_right_table.header.frame_id = "table_frame";
-    
+
     // Reduce the height of the block by half for the correct centroid calculation
     int pts_block_size = pts_above_right_table_ptr->points.size();
-    for (int i=0; i<pts_block_size; i++)
+    for (int i = 0; i < pts_block_size; i++)
     {
-        pts_above_right_table_ptr->points[i].z = (pts_above_right_table_ptr->points[i].z)/2;
+        pts_above_right_table_ptr->points[i].z = 0; //(pts_above_right_table_ptr->points[i].z)/2;
     }
 
     pcl::computeCentroid(*pts_above_right_table_ptr, indices, block_centroid);
@@ -176,7 +176,7 @@ int main(int argc, char **argv)
 
         transform.setOrigin(tf::Vector3(block_x, block_y, block_z));
         transform.setRotation(tf::Quaternion(0, 0, 0, 1));
-        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),"table_frame", "block_frame"));
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "table_frame", "block_frame"));
 
         ros::spinOnce(); //pclUtils needs some spin cycles to invoke callbacks for new selected points
         ros::Duration(0.3).sleep();

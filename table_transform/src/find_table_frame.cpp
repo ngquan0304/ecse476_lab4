@@ -143,8 +143,8 @@ int main(int argc, char** argv) {
     pcl::toROSMsg(*downsampled_kinect_ptr, downsampled_cloud); //convert to ros message for publication and display
 
     Eigen::Vector3f box_pt_min, box_pt_max;
-    box_pt_min << -0.4, -0.5, 0.2;
-    box_pt_max << 0.4, 0.0, 2;
+    box_pt_min << -0.4, -0.5, 0.2; //-0.4, -0.35, 0.2;  -> use this with block 7 to get a table plane without block
+    box_pt_max << 0.15, 0.0, 2;
 
 
     int nsamps = downsampled_kinect_ptr->points.size();
