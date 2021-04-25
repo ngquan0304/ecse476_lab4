@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<hr>
+<h1 id="mobile-robotics---lab4">Mobile Robotics - Lab4</h1>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>To create a transform that relates the camera frame to the robot's torso frame</li>
+<li>To calibrate and validate coordinates of blokcs with respect to the torso frame, as seen by camera</li>
+</ul>
+<h2 id="command-sets">Command sets:</h2>
+<ol>
+<li><strong>To play jsp files with Baxter in Gazebo</strong></li>
+</ol>
+<ul>
+<li>E.g.: to show <code>arm1.pcd</code> and play <code>arm1.jsp</code></li>
+</ul>
+<p>[Learning ROS ws] <code>roslaunch baxter_gazeo baxter_world.launch</code></p>
+<p>[Learning ROS ws] <code>roslaunch baxter_launch_files baxter_playfile_nodes.launch</code></p>
+<p>[This Repo ws] <code>rosrun pcd_utils display_pcd_files</code> then <code>arm1.pcd</code></p>
+<p>[This Repo ws] <code>rosrun baxter_playfile_nodes baxter_playback arm1.jsp</code></p>
+<ol>
+<li><strong>To show pcd files and demo block recognition in RViZ</strong></li>
+</ol>
+<p>[Learning ROS ws] <code>roslaunch baxter_gazebo baxter_world.launch</code></p>
+<p>[Learning ROS ws] <code>roslaunch baxter_launch_files baxter_playfile_nodes.launch</code></p>
+<p>[This Repo ws] <code>roslaunch table_transform table_frame_wrt_cam_block.launch</code></p>
+<p>[This Repo ws] <code>roslaunch table_transform camera_frame_wrt_head_block.launch</code></p>
+<p>[This Repo ws] <code>rosrun table_transform find_block</code></p>
+<hr>
+<h1 id="lab-result">Lab Result</h1>
+<h2 id="part-1">Part 1:</h2>
+<ul>
+<li>Calibrated values for head/kinect_link using PCDs of arm: in <code>camera_frame_wrt_head.launch</code></li>
+<li>Please check the calibrated images <a href="https://drive.google.com/drive/folders/1OCkdHrOwKWOUz8bLaBRzT_fLfCAEopgL?usp=sharing">HERE</a>.</li>
+</ul>
+<h2 id="part-2">Part 2:</h2>
+<ul>
+<li>For this part, we use a box filter to obtain only the pointcloud of the upper surface of the block to calculate the x,y coordinate of its centroid, with z = 0 w.r.t <code>table_frame</code>.</li>
+<li>Observed that eventhough the calibration from the first part can be perceived to be matched, the output errors are large.</li>
+<li>Decided to find coordinates twice:
+<ul>
+<li>
+<p>Using the launch file made in first part: <code>camera_frame_wrt_head.launch</code></p>
+<blockquote>
+<p>&lt;node pkg=&quot;tf&quot; type=&quot;static_transform_publisher&quot; name=&quot;kinect_calib&quot; args=&quot;0.166 0.005 0.123 0.007 1.425 0.0  head kinect_link 50&quot;/&gt;</p>
+</blockquote>
+</li>
+<li>
+<p>Using a recalibrated launch file for this part: <code>camera_frame_wrt_head_block.launch</code></p>
+<blockquote>
+<p>&lt;node pkg=&quot;tf&quot; type=&quot;static_transform_publisher&quot; name=&quot;kinect_calib&quot; args=&quot;0.171 0.023 0.123 0.015 1.425 0.0  head kinect_link 50&quot;/&gt;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="with-cameraframewrtheadlaunch">With <code>camera_frame_wrt_head.launch</code></h3>
+<ol>
+<li><strong>block1.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.498, -0.083, -0.185]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.353]
+</div></code></pre>
+<ol start="2">
+<li><strong>block2.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.639, -0.088, -0.185]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.350]
+</div></code></pre>
+<ol start="3">
+<li><strong>block3.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.631, -0.380, -0.180]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.350]
+</div></code></pre>
+<ol start="4">
+<li><strong>block4.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.727, -0.189, -0.183]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.349]
+</div></code></pre>
+<ol start="5">
+<li><strong>block5.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.637, -0.011, -0.186]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.346]
+</div></code></pre>
+<ol start="6">
+<li><strong>block6.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.458, -0.144, -0.185]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.346]
+</div></code></pre>
+<ol start="7">
+<li><strong>block7.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.778, -0.116, -0.184]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.344]
+</div></code></pre>
+<ol start="8">
+<li><strong>block8.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.795, -0.428, -0.179]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.344]
+</div></code></pre>
+<ol start="9">
+<li><strong>block9.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.400, -0.427, -0.181]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.343]
+</div></code></pre>
+<ol start="10">
+<li><strong>block10.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.460, 0.071, -0.188]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.343]
+</div></code></pre>
+<ol start="11">
+<li><strong>block11.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.587, -0.403, -0.180]
+- Rotation: in Quaternion [-0.007, -0.002, 0.038, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.076]
+            in RPY (degree) [-0.844, -0.197, 4.340]
+</div></code></pre>
+<hr>
+<h3 id="with-cameraframewrtheadblocklauch">With <code>camera_frame_wrt_head_block.lauch</code></h3>
+<ol>
+<li><strong>block1.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.503, -0.059, -0.185]
+- Rotation: in Quaternion [-0.007, -0.002, 0.042, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.084]
+            in RPY (degree) [-0.844, -0.197, 4.792]
+</div></code></pre>
+<ol start="2">
+<li><strong>block2.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.644, -0.062, -0.185]
+- Rotation: in Quaternion [-0.007, -0.002, 0.042, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.084]
+            in RPY (degree) [-0.844, -0.197, 4.802]
+</div></code></pre>
+<ol start="3">
+<li><strong>block3.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.641, -0.354, -0.180]
+- Rotation: in Quaternion [-0.007, -0.002, 0.042, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.084]
+            in RPY (degree) [-0.844, -0.197, 4.823]
+</div></code></pre>
+<ol start="4">
+<li><strong>block4.pcd</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.733, -0.161, -0.183]
+- Rotation: in Quaternion [-0.007, -0.002, 0.042, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.084]
+            in RPY (degree) [-0.844, -0.197, 4.835]
+</div></code></pre>
+<ol start="5">
+<li><strong>block5.pcd:</strong></li>
+</ol>
+<pre class="hljs"><code><div>At time 12457.544
+- Translation: [0.641, 0.015, -0.186]
+- Rotation: in Quaternion [-0.007, -0.002, 0.042, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.085]
+            in RPY (degree) [-0.844, -0.197, 4.864]
+</div></code></pre>
+<ol start="6">
+<li><strong>block6.pcd:</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.464, -0.121, -0.185]
+- Rotation: in Quaternion [-0.007, -0.002, 0.043, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.085]
+            in RPY (degree) [-0.844, -0.197, 4.891]
+</div></code></pre>
+<ol start="7">
+<li><strong>block7.pcd:</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.784, -0.088, -0.184]
+- Rotation: in Quaternion [-0.007, -0.002, 0.043, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.086]
+            in RPY (degree) [-0.844, -0.197, 4.907]
+</div></code></pre>
+<ol start="8">
+<li><strong>block8.pcd:</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.805, -0.400, -0.179]
+- Rotation: in Quaternion [-0.007, -0.002, 0.043, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.086]
+            in RPY (degree) [-0.844, -0.197, 4.920]
+
+</div></code></pre>
+<ol start="9">
+<li><strong>block9.pcd:</strong></li>
+</ol>
+<pre class="hljs"><code><div>At time 12629.750
+- Translation: [0.410, -0.405, -0.181]
+- Rotation: in Quaternion [-0.007, -0.002, 0.043, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.087]
+            in RPY (degree) [-0.844, -0.197, 4.959]
+</div></code></pre>
+<ol start="10">
+<li><strong>block10.pcd:</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.462, 0.094, -0.188]
+- Rotation: in Quaternion [-0.007, -0.002, 0.043, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.087]
+            in RPY (degree) [-0.844, -0.197, 4.988]
+</div></code></pre>
+<ol start="11">
+<li><strong>block10.pcd:</strong></li>
+</ol>
+<pre class="hljs"><code><div>- Translation: [0.596, -0.379, -0.180]
+- Rotation: in Quaternion [-0.007, -0.002, 0.045, 0.999]
+            in RPY (radian) [-0.015, -0.003, 0.090]
+            in RPY (degree) [-0.844, -0.197, 5.176]
+</div></code></pre>
+<hr>
+<h3 id="remarks">Remarks:</h3>
+<ul>
+<li>The coordinates are within ± 14.0 mm for x-axis, ± 27mm for y-axis, and ± 5 mm for x-axis when using the arm pcd files.</li>
+<li>The coordinates are within ± 5 mm for the error on all axis when recalibrated using the given coordinates of block 5, 8, 9, and 10.</li>
+</ul>
+
+</body>
+</html>

@@ -145,7 +145,7 @@ int main(int argc, char **argv)
     ros_pts_above_table.header.frame_id = "table_frame";
 
     Eigen::Vector3f box_pt_min, box_pt_max;
-    box_pt_min << 0.02, -1, -1;
+    box_pt_min << 0.05, -1, -1;
     box_pt_max << 1, 0.2, 1;
 
     vector<int> indices2;
